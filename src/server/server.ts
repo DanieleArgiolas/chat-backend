@@ -2,14 +2,17 @@ import express, { Application, Request, Response, NextFunction  } from 'express'
 import { webRouter } from '../routes/web';
 import morgan from 'morgan';
 import cors from 'cors';
+import { createServer, Server as HttpServer } from 'http';
 class Server {
   private app: Application;
+  private httpServer: HttpServer;
 
   constructor() {
     this.app = express();
     this.configureMiddlewares();
     this.configureRoutes();
     this.configureErrorHandling();
+    this.httpServer = createServer(this.app);
   }
 
   private configureMiddlewares() {
@@ -54,6 +57,12 @@ class Server {
       console.log(`Server is running on port ${port}`);
     });
   }
+
+
+  public getHttpServer(): HttpServer {
+    return this.httpServer;
+  }
+
 }
 
 
