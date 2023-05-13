@@ -3,7 +3,9 @@ import { webRouter } from '../routes/web';
 import morgan from 'morgan';
 import cors from 'cors';
 import { createServer, Server as HttpServer } from 'http';
-class Server {
+import { injectable } from 'inversify';
+@injectable()
+class ServerStarter {
   private app: Application;
   private httpServer: HttpServer;
 
@@ -66,4 +68,4 @@ class Server {
 }
 
 
-export {Server}
+export {ServerStarter}
