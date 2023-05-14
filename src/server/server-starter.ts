@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { createServer, Server as HttpServer } from 'http';
 import { injectable } from 'inversify';
+import { apiRouter } from '../routes/api';
 @injectable()
 class ServerStarter {
   private app: Application;
@@ -25,6 +26,7 @@ class ServerStarter {
 
   private configureRoutes() {
     this.app.use('/', webRouter);
+    this.app.use('/api', apiRouter);
   }
 
   private configureErrorHandling() {
